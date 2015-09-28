@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2015-09-28 01:26
+-- Generated: 2015-09-28 18:40
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -7,15 +7,15 @@
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 CREATE SCHEMA IF NOT EXISTS `sevrykov_task` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 
 CREATE TABLE IF NOT EXISTS `sevrykov_task`.`objects` (
-  `object_id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `object_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `contact_id` INT(10) UNSIGNED NULL DEFAULT NULL ,
   `price` DECIMAL(12,2) NULL DEFAULT NULL ,
   `cost` DECIMAL(12,2) NULL DEFAULT NULL ,
-  `contact_id` INT(11) NULL DEFAULT NULL ,
   `start` DATE NULL DEFAULT NULL ,
   `end_expected` DATE NULL DEFAULT NULL ,
   `end_actually` DATE NULL DEFAULT NULL ,
@@ -76,16 +76,17 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS `sevrykov_task`.`employees` (
-  `employee_id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `employee_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `contact_id` INT(10) UNSIGNED NOT NULL ,
-  PRIMARY KEY (`employee_id`)  )
+  PRIMARY KEY (`employee_id`),  
+  KEY (`contact_id`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
 CREATE TABLE IF NOT EXISTS `sevrykov_task`.`clients` (
-  `client_id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `contact_id` INT(11) NOT NULL ,
+  `client_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `contact_id` INT(10) UNSIGNED NOT NULL ,
   PRIMARY KEY (`client_id`)  ,
   UNIQUE INDEX `contact_id_UNIQUE` (`contact_id` ASC)  )
 ENGINE = InnoDB

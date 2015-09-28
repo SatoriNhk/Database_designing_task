@@ -1,38 +1,29 @@
-Executing SQL script in server
-ERROR: Error 1005: Can't create table 'sevrykov_task.contacts' (errno: 150)
+ERROR: Error 1005: Can't create table 'sevrykov_task.tasks' (errno: 150)
 SQL Code:
-        CREATE TABLE IF NOT EXISTS `sevrykov_task`.`contacts` (
-          `contact_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
-          `contact_data_type_id` INT(10) UNSIGNED NULL DEFAULT NULL ,
-          `data` VARCHAR(45) NULL DEFAULT NULL ,
-          PRIMARY KEY (`contact_id`)  ,
-          UNIQUE INDEX `contact_id_UNIQUE` (`contact_id` ASC)  ,
-          INDEX `fk_contacts_contact_data_types1_idx` (`contact_data_type_id` ASC)  ,
-          CONSTRAINT `fk_contacts_objects1`
-            FOREIGN KEY (`contact_id`)
-            REFERENCES `sevrykov_task`.`objects` (`contact_id`)
+        CREATE TABLE IF NOT EXISTS `sevrykov_task`.`tasks` (
+          `task_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
+          `object_has_employees_id` INT(10) UNSIGNED NOT NULL ,
+          `task_type` INT(10) UNSIGNED NULL DEFAULT NULL ,
+          `start` DATETIME NULL DEFAULT NULL ,
+          `end_expected` DATETIME NULL DEFAULT NULL ,
+          `end_actually` DATETIME NULL DEFAULT NULL ,
+          PRIMARY KEY (`task_id`)  ,
+          INDEX `fk_tasks_objects_has_employees1_idx` (`object_has_employees_id` ASC)  ,
+          CONSTRAINT `fk_tasks_objects_has_employees1`
+            FOREIGN KEY (`object_has_employees_id`)
+            REFERENCES `sevrykov_task`.`objects_has_employees` (`objects_has_employees_id`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION,
-          CONSTRAINT `fk_contacts_contact_data_types1`
-            FOREIGN KEY (`contact_data_type_id`)
-            REFERENCES `sevrykov_task`.`contact_data_types` (`contact_data_types_id`)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-          CONSTRAINT `fk_contacts_employees1`
-            FOREIGN KEY (`contact_id`)
-            REFERENCES `sevrykov_task`.`employees` (`contact_id`)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION,
-          CONSTRAINT `fk_contacts_clients1`
-            FOREIGN KEY (`contact_id`)
-            REFERENCES `sevrykov_task`.`clients` (`contact_id`)
+          CONSTRAINT `fk_tasks_costs1`
+            FOREIGN KEY (`task_id`)
+            REFERENCES `sevrykov_task`.`costs` (`task_id`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION)
         ENGINE = InnoDB
         DEFAULT CHARACTER SET = utf8
         COLLATE = utf8_general_ci
 
-SQL script execution finished: statements: 6 succeeded, 1 failed
+SQL script execution finished: statements: 11 succeeded, 1 failed
 
 Fetching back view definitions in final form.
 Nothing to fetch
