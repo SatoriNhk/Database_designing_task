@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2015-09-28 18:40
+-- Generated: 2015-09-29 04:28
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -9,9 +9,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-CREATE SCHEMA IF NOT EXISTS `sevrykov_task` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-
-CREATE TABLE IF NOT EXISTS `sevrykov_task`.`objects` (
+CREATE TABLE IF NOT EXISTS `sevrykov_task`.`object` (
   `object_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `contact_id` INT(10) UNSIGNED NULL DEFAULT NULL ,
   `price` DECIMAL(12,2) NULL DEFAULT NULL ,
@@ -25,7 +23,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `sevrykov_task`.`costs` (
+CREATE TABLE IF NOT EXISTS `sevrykov_task`.`cost` (
   `cost_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `material_id` INT(10) UNSIGNED NOT NULL ,
   `task_id` INT(10) UNSIGNED NOT NULL ,
@@ -34,57 +32,61 @@ CREATE TABLE IF NOT EXISTS `sevrykov_task`.`costs` (
   `date` DATETIME NOT NULL ,
   `is_planned_costs` TINYINT(1) NOT NULL ,
   PRIMARY KEY (`cost_id`)  ,
-  INDEX `fk_costs_materials1_idx` (`material_id` ASC)  ,
-  CONSTRAINT `fk_costs_materials1`
+  INDEX `fk_cost_material1_idx` (`material_id` ASC)  ,
+  INDEX `fk_cost_task1_idx` (`task_id` ASC)  ,
+  CONSTRAINT `fk_cost_material1`
     FOREIGN KEY (`material_id`)
-    REFERENCES `sevrykov_task`.`materials` (`material_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `sevrykov_task`.`material` (`material_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_cost_task1`
+    FOREIGN KEY (`task_id`)
+    REFERENCES `sevrykov_task`.`task` (`task_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `sevrykov_task`.`contacts` (
-  `contact_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
-  `contact_data_type_id` INT(10) UNSIGNED NULL DEFAULT NULL ,
-  `data` VARCHAR(45) NULL DEFAULT NULL ,
-  PRIMARY KEY (`contact_id`)  ,
-  UNIQUE INDEX `contact_id_UNIQUE` (`contact_id` ASC)  ,
-  INDEX `fk_contacts_contact_data_types1_idx` (`contact_data_type_id` ASC)  ,
-  CONSTRAINT `fk_contacts_objects1`
+CREATE TABLE IF NOT EXISTS `sevrykov_task`.`contact` (
+  `contact_id` INT(10) UNSIGNED NOT NULL ,
+  `contact_data_type_id` INT(10) UNSIGNED NOT NULL ,
+  `data` VARCHAR(100) NULL DEFAULT NULL ,
+  INDEX `fk_contact_contact_data_type1_idx` (`contact_data_type_id` ASC)  ,
+  CONSTRAINT `fk_contact_employee1`
     FOREIGN KEY (`contact_id`)
-    REFERENCES `sevrykov_task`.`objects` (`contact_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_contacts_contact_data_types1`
+    REFERENCES `sevrykov_task`.`employee` (`contact_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_contact_contact_data_type1`
     FOREIGN KEY (`contact_data_type_id`)
-    REFERENCES `sevrykov_task`.`contact_data_types` (`contact_data_types_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_contacts_employees1`
+    REFERENCES `sevrykov_task`.`contact_data_type` (`contact_data_type_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_contact_client1`
     FOREIGN KEY (`contact_id`)
-    REFERENCES `sevrykov_task`.`employees` (`contact_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_contacts_clients1`
+    REFERENCES `sevrykov_task`.`client` (`contact_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_contact_object1`
     FOREIGN KEY (`contact_id`)
-    REFERENCES `sevrykov_task`.`clients` (`contact_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `sevrykov_task`.`object` (`contact_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `sevrykov_task`.`employees` (
+CREATE TABLE IF NOT EXISTS `sevrykov_task`.`employee` (
   `employee_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `contact_id` INT(10) UNSIGNED NOT NULL ,
-  PRIMARY KEY (`employee_id`),  
-  KEY (`contact_id`) )
+  PRIMARY KEY (`employee_id`)  ,
+  UNIQUE INDEX `contact_id_UNIQUE` (`contact_id` ASC)  )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `sevrykov_task`.`clients` (
+CREATE TABLE IF NOT EXISTS `sevrykov_task`.`client` (
   `client_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `contact_id` INT(10) UNSIGNED NOT NULL ,
   PRIMARY KEY (`client_id`)  ,
@@ -93,7 +95,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `sevrykov_task`.`materials` (
+CREATE TABLE IF NOT EXISTS `sevrykov_task`.`material` (
   `material_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `material_name` VARCHAR(100) NULL DEFAULT NULL ,
   PRIMARY KEY (`material_id`)  ,
@@ -111,53 +113,48 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `sevrykov_task`.`tasks` (
+CREATE TABLE IF NOT EXISTS `sevrykov_task`.`task` (
   `task_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `object_has_employees_id` INT(10) UNSIGNED NOT NULL ,
-  `task_type` INT(10) UNSIGNED NULL DEFAULT NULL ,
+  `task_type_id` INT(10) UNSIGNED NULL DEFAULT NULL ,
   `start` DATETIME NULL DEFAULT NULL ,
   `end_expected` DATETIME NULL DEFAULT NULL ,
   `end_actually` DATETIME NULL DEFAULT NULL ,
   PRIMARY KEY (`task_id`)  ,
-  INDEX `fk_tasks_objects_has_employees1_idx` (`object_has_employees_id` ASC)  ,
-  CONSTRAINT `fk_tasks_objects_has_employees1`
-    FOREIGN KEY (`object_has_employees_id`)
-    REFERENCES `sevrykov_task`.`objects_has_employees` (`objects_has_employees_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_tasks_costs1`
-    FOREIGN KEY (`task_id`)
-    REFERENCES `sevrykov_task`.`costs` (`task_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  INDEX `fk_task_task_type1_idx` (`task_type_id` ASC)  ,
+  CONSTRAINT `fk_task_task_type1`
+    FOREIGN KEY (`task_type_id`)
+    REFERENCES `sevrykov_task`.`task_type` (`task_type_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `sevrykov_task`.`objects_has_employees` (
+CREATE TABLE IF NOT EXISTS `sevrykov_task`.`object_has_employee` (
   `objects_has_employees_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `object_id` INT(10) UNSIGNED NOT NULL ,
   `employee_id` INT(10) UNSIGNED NOT NULL ,
   `profession_id` INT(10) UNSIGNED NOT NULL ,
   PRIMARY KEY (`objects_has_employees_id`, `object_id`, `employee_id`, `profession_id`)  ,
-  INDEX `fk_objects_has_employees_employees1_idx` (`employee_id` ASC)  ,
-  INDEX `fk_objects_has_employees_profession1_idx` (`profession_id` ASC)  ,
-  INDEX `fk_objects_has_employees_objects1_idx` (`object_id` ASC)  ,
-  CONSTRAINT `fk_objects_has_employees_employees1`
-    FOREIGN KEY (`employee_id`)
-    REFERENCES `sevrykov_task`.`employees` (`employee_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_objects_has_employees_profession1`
+  INDEX `fk_object_has_employee_profession1_idx` (`profession_id` ASC)  ,
+  INDEX `fk_object_has_employee_employee1_idx` (`employee_id` ASC)  ,
+  INDEX `fk_object_has_employee_object1_idx` (`object_id` ASC)  ,
+  CONSTRAINT `fk_object_has_employee_profession1`
     FOREIGN KEY (`profession_id`)
     REFERENCES `sevrykov_task`.`profession` (`profession_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_objects_has_employees_objects1`
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_object_has_employee_employee1`
+    FOREIGN KEY (`employee_id`)
+    REFERENCES `sevrykov_task`.`employee` (`employee_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_object_has_employee_object1`
     FOREIGN KEY (`object_id`)
-    REFERENCES `sevrykov_task`.`objects` (`object_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `sevrykov_task`.`object` (`object_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
@@ -167,26 +164,26 @@ CREATE TABLE IF NOT EXISTS `sevrykov_task`.`contract` (
   `object_id` INT(10) UNSIGNED NOT NULL ,
   `client_id` INT(10) UNSIGNED NOT NULL ,
   PRIMARY KEY (`contract_id`)  ,
-  INDEX `fk_contract_objects_idx` (`object_id` ASC)  ,
-  INDEX `fk_contract_clients1_idx` (`client_id` ASC)  ,
-  CONSTRAINT `fk_contract_objects`
-    FOREIGN KEY (`object_id`)
-    REFERENCES `sevrykov_task`.`objects` (`object_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_contract_clients1`
+  INDEX `fk_contract_client1_idx` (`client_id` ASC)  ,
+  INDEX `fk_contract_object1_idx` (`object_id` ASC)  ,
+  CONSTRAINT `fk_contract_client1`
     FOREIGN KEY (`client_id`)
-    REFERENCES `sevrykov_task`.`clients` (`client_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    REFERENCES `sevrykov_task`.`client` (`client_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_contract_object1`
+    FOREIGN KEY (`object_id`)
+    REFERENCES `sevrykov_task`.`object` (`object_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `sevrykov_task`.`contact_data_types` (
-  `contact_data_types_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
+CREATE TABLE IF NOT EXISTS `sevrykov_task`.`contact_data_type` (
+  `contact_data_type_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `data_type` VARCHAR(45) NULL DEFAULT NULL ,
-  PRIMARY KEY (`contact_data_types_id`)  ,
+  PRIMARY KEY (`contact_data_type_id`)  ,
   UNIQUE INDEX `type_UNIQUE` (`data_type` ASC)  )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
@@ -196,12 +193,7 @@ CREATE TABLE IF NOT EXISTS `sevrykov_task`.`task_type` (
   `task_type_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT ,
   `task_type_name` VARCHAR(150) NULL DEFAULT NULL ,
   PRIMARY KEY (`task_type_id`)  ,
-  UNIQUE INDEX `task_type_name_UNIQUE` (`task_type_name` ASC)  ,
-  CONSTRAINT `fk_task_type_tasks1`
-    FOREIGN KEY (`task_type_id`)
-    REFERENCES `sevrykov_task`.`tasks` (`task_type`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  UNIQUE INDEX `task_type_name_UNIQUE` (`task_type_name` ASC)  )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
