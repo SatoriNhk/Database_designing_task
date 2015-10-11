@@ -1,0 +1,17 @@
+name
+surname
+gender
+e-mail
+company name
+phone number
+cell phone number
+address
+city
+street
+house
+apartment
+website
+date of birth
+date of employment
+company name
+fax
