@@ -95,7 +95,7 @@
             <IsLoop>true</IsLoop>
             <Unique>true</Unique>
             <IsAlwaysUnique>false</IsAlwaysUnique>
-            <FileName>C:\Users\Public\Documents\Devart\dbForge Data Generator for MySQL\Data Generators\ContactDataTypes.txt</FileName>
+            <FileName>D:\Mail.Ru\Koks\Documents\GitHub\Database_designing_task\generate\auxiliary files\ContactDataTypes.txt</FileName>
             <TrimLeft>false</TrimLeft>
             <TrimRight>false</TrimRight>
             <CodePage>1251</CodePage>
@@ -118,7 +118,7 @@
           <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="MySqlUnsignedIntegerGeneratorOptions">
-            <RowsCountToGenerate>300</RowsCountToGenerate>
+            <RowsCountToGenerate>50</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>true</Unique>
@@ -196,44 +196,44 @@
       </Columns>
     </Table>
     <Table Name="profession">
-      <Checked>false</Checked>
+      <Checked>true</Checked>
       <Settings>
         <RowsToGenerate>1000</RowsToGenerate>
         <Truncate>true</Truncate>
       </Settings>
       <Columns>
         <Column Name="profession_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <Precision>10</Precision>
         </Column>
         <Column Name="profession_name">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>VARCHAR</DataType>
           <Length>100</Length>
         </Column>
       </Columns>
     </Table>
     <Table Name="client_contact">
-      <Checked>false</Checked>
+      <Checked>true</Checked>
       <Settings>
-        <RowsToGenerate>150</RowsToGenerate>
+        <RowsToGenerate>50</RowsToGenerate>
         <Truncate>true</Truncate>
       </Settings>
       <Columns>
         <Column Name="client_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="ForeignKeyGeneratorOptions">
-            <Unique>false</Unique>
+            <Unique>true</Unique>
             <IsAlwaysUnique>false</IsAlwaysUnique>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <ValueDistributionMode>Sequential</ValueDistributionMode>
             <SeedValue>2</SeedValue>
-            <RepeatValues>true</RepeatValues>
-            <FromTimes>2</FromTimes>
-            <ToTimes>2</ToTimes>
+            <RepeatValues>false</RepeatValues>
+            <FromTimes>1</FromTimes>
+            <ToTimes>1</ToTimes>
           </GeneratorOptions>
           <GeneratorType>ForeignKeyGenerator</GeneratorType>
           <GeneratorName>Foreign Key (auto assigned)</GeneratorName>
@@ -242,40 +242,43 @@
           <Precision>10</Precision>
         </Column>
         <Column Name="contact_data_type_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
-          <GeneratorOptions xsi:type="ForeignKeyGeneratorOptions">
-            <Unique>false</Unique>
-            <IsAlwaysUnique>false</IsAlwaysUnique>
+          <GeneratorOptions xsi:type="ConstantGeneratorOptions">
+            <RowsCountToGenerate>50</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
-            <ValueDistributionMode>Sequential</ValueDistributionMode>
+            <Unique>false</Unique>
+            <IsAlwaysUnique>false</IsAlwaysUnique>
+            <ValueDistributionMode>Random</ValueDistributionMode>
             <SeedValue>3</SeedValue>
-            <RepeatValues>false</RepeatValues>
-            <FromTimes>1</FromTimes>
-            <ToTimes>10</ToTimes>
+            <AllowEmptyStrings>false</AllowEmptyStrings>
+            <EmptyStringProportion>10</EmptyStringProportion>
+            <ConstantDistributionMode>UserDefined</ConstantDistributionMode>
+            <UserDefinedConstant xsi:type="xsd:decimal">1</UserDefinedConstant>
+            <ColumnDefaultConstant />
           </GeneratorOptions>
-          <GeneratorType>ForeignKeyGenerator</GeneratorType>
-          <GeneratorName>Foreign Key (auto assigned)</GeneratorName>
-          <GeneratorDescription>references a column from parent table</GeneratorDescription>
+          <GeneratorType>MySqlConstantGenerator</GeneratorType>
+          <GeneratorName>Constant</GeneratorName>
+          <GeneratorDescription>fill with a constant or column default value</GeneratorDescription>
           <HasForeignKey>true</HasForeignKey>
           <Precision>10</Precision>
         </Column>
         <Column Name="data">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>VARCHAR</DataType>
           <GeneratorOptions xsi:type="TextFileGeneratorOptions">
             <RowsCountToGenerate>50</RowsCountToGenerate>
-            <AllowNulls>true</AllowNulls>
+            <AllowNulls>false</AllowNulls>
             <NullProportion>10</NullProportion>
             <AllowEmptyStrings>false</AllowEmptyStrings>
             <EmptyStringProportion>10</EmptyStringProportion>
             <ValueDistributionMode>Random</ValueDistributionMode>
             <SeedValue>2</SeedValue>
             <IsLoop>true</IsLoop>
-            <Unique>true</Unique>
+            <Unique>false</Unique>
             <IsAlwaysUnique>false</IsAlwaysUnique>
-            <FileName>C:\Users\Public\Documents\Devart\dbForge Data Generator for MySQL\Data Generators\RUFirstNamesFemale.txt</FileName>
+            <FileName>D:\Mail.Ru\Koks\Documents\GitHub\Database_designing_task\generate\auxiliary files\FemaleNames.txt</FileName>
             <TrimLeft>false</TrimLeft>
             <TrimRight>false</TrimRight>
             <CodePage>1251</CodePage>
@@ -288,14 +291,14 @@
       </Columns>
     </Table>
     <Table Name="employe_contact">
-      <Checked>false</Checked>
+      <Checked>true</Checked>
       <Settings>
-        <RowsToGenerate>900</RowsToGenerate>
+        <RowsToGenerate>300</RowsToGenerate>
         <Truncate>true</Truncate>
       </Settings>
       <Columns>
         <Column Name="employe_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="ForeignKeyGeneratorOptions">
             <Unique>true</Unique>
@@ -315,47 +318,50 @@
           <Precision>10</Precision>
         </Column>
         <Column Name="contact_data_type_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
-          <GeneratorOptions xsi:type="CustomForeignKeyGeneratorOptions">
-            <Unique>false</Unique>
-            <IsAlwaysUnique>false</IsAlwaysUnique>
+          <GeneratorOptions xsi:type="ConstantGeneratorOptions">
+            <RowsCountToGenerate>50</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
-            <ValueDistributionMode>Sequential</ValueDistributionMode>
-            <SeedValue>10</SeedValue>
-            <RepeatValues>true</RepeatValues>
-            <FromTimes>3</FromTimes>
-            <ToTimes>3</ToTimes>
-            <ReferenceTableName>contact_data_type</ReferenceTableName>
-            <ReferenceColumnNames>
-              <string>contact_data_type_id</string>
-            </ReferenceColumnNames>
+            <Unique>false</Unique>
+            <IsAlwaysUnique>false</IsAlwaysUnique>
+            <ValueDistributionMode>Random</ValueDistributionMode>
+            <SeedValue>8</SeedValue>
+            <AllowEmptyStrings>false</AllowEmptyStrings>
+            <EmptyStringProportion>10</EmptyStringProportion>
+            <ConstantDistributionMode>UserDefined</ConstantDistributionMode>
+            <UserDefinedConstant xsi:type="xsd:decimal">1</UserDefinedConstant>
+            <ColumnDefaultConstant />
           </GeneratorOptions>
-          <GeneratorType>CustomForeignKeyGenerator</GeneratorType>
-          <GeneratorName>Foreign Key (manually assigned)</GeneratorName>
-          <GeneratorDescription>references a column from parent table</GeneratorDescription>
+          <GeneratorType>MySqlConstantGenerator</GeneratorType>
+          <GeneratorName>Constant</GeneratorName>
+          <GeneratorDescription>fill with a constant or column default value</GeneratorDescription>
           <HasForeignKey>true</HasForeignKey>
           <Precision>10</Precision>
         </Column>
         <Column Name="data">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>VARCHAR</DataType>
-          <GeneratorOptions xsi:type="MySqlRegularExpressionGeneratorOptions">
+          <GeneratorOptions xsi:type="TextFileGeneratorOptions">
             <RowsCountToGenerate>50</RowsCountToGenerate>
-            <AllowNulls>true</AllowNulls>
+            <AllowNulls>false</AllowNulls>
             <NullProportion>10</NullProportion>
-            <ValueDistributionMode>Random</ValueDistributionMode>
-            <SeedValue>9</SeedValue>
-            <Unique>true</Unique>
-            <IsAlwaysUnique>false</IsAlwaysUnique>
-            <Expression>[0-9A-Z]+</Expression>
             <AllowEmptyStrings>false</AllowEmptyStrings>
             <EmptyStringProportion>10</EmptyStringProportion>
+            <ValueDistributionMode>Random</ValueDistributionMode>
+            <SeedValue>7</SeedValue>
+            <IsLoop>true</IsLoop>
+            <Unique>false</Unique>
+            <IsAlwaysUnique>false</IsAlwaysUnique>
+            <FileName>D:\Mail.Ru\Koks\Documents\GitHub\Database_designing_task\generate\auxiliary files\MaleNames.txt</FileName>
+            <TrimLeft>false</TrimLeft>
+            <TrimRight>false</TrimRight>
+            <CodePage>1251</CodePage>
           </GeneratorOptions>
-          <GeneratorType>MySqlStringRegularExpressionGenerator</GeneratorType>
-          <GeneratorName>Reg Exp</GeneratorName>
-          <GeneratorDescription>values based on a regular expression</GeneratorDescription>
+          <GeneratorType>MySqlTextFileGenerator</GeneratorType>
+          <GeneratorName>Text File</GeneratorName>
+          <GeneratorDescription>loads values from specified text file</GeneratorDescription>
           <Length>100</Length>
         </Column>
       </Columns>
@@ -363,7 +369,7 @@
     <Table Name="object">
       <Checked>true</Checked>
       <Settings>
-        <RowsToGenerate>1000</RowsToGenerate>
+        <RowsToGenerate>75</RowsToGenerate>
         <Truncate>true</Truncate>
       </Settings>
       <Columns>
@@ -394,7 +400,7 @@
           <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="ForeignKeyGeneratorOptions">
-            <Unique>true</Unique>
+            <Unique>false</Unique>
             <IsAlwaysUnique>false</IsAlwaysUnique>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
@@ -439,8 +445,8 @@
           <GeneratorOptions xsi:type="DecimalGeneratorOptions">
             <RowsCountToGenerate>50</RowsCountToGenerate>
             <AllowNulls>true</AllowNulls>
-            <NullProportion>10</NullProportion>
-            <Unique>true</Unique>
+            <NullProportion>100</NullProportion>
+            <Unique>false</Unique>
             <IsAlwaysUnique>false</IsAlwaysUnique>
             <Increment xsi:type="xsd:decimal">1</Increment>
             <ValueDistributionMode>Seed</ValueDistributionMode>
@@ -460,6 +466,24 @@
         <Column Name="cost">
           <Checked>true</Checked>
           <DataType>DECIMAL</DataType>
+          <GeneratorOptions xsi:type="DecimalGeneratorOptions">
+            <RowsCountToGenerate>50</RowsCountToGenerate>
+            <AllowNulls>true</AllowNulls>
+            <NullProportion>100</NullProportion>
+            <Unique>false</Unique>
+            <IsAlwaysUnique>false</IsAlwaysUnique>
+            <Increment xsi:type="xsd:decimal">1</Increment>
+            <ValueDistributionMode>Seed</ValueDistributionMode>
+            <SeedValue>12</SeedValue>
+            <MinValue>99</MinValue>
+            <MaxValue>999</MaxValue>
+            <UseDefault>false</UseDefault>
+            <DefaultValue>NULL</DefaultValue>
+          </GeneratorOptions>
+          <GeneratorType>MySqlDecimalGenerator</GeneratorType>
+          <GeneratorName>Product Cost</GeneratorName>
+          <GeneratorDescription>379, 942, 158, 261, ...</GeneratorDescription>
+          <GeneratorCategory>Product</GeneratorCategory>
           <Scale>2</Scale>
           <Precision>12</Precision>
         </Column>
@@ -468,21 +492,21 @@
           <DataType>DATE</DataType>
           <GeneratorOptions xsi:type="DateGeneratorOptions">
             <RowsCountToGenerate>50</RowsCountToGenerate>
-            <AllowNulls>true</AllowNulls>
+            <AllowNulls>false</AllowNulls>
             <NullProportion>10</NullProportion>
-            <Unique>true</Unique>
+            <Unique>false</Unique>
             <IsAlwaysUnique>false</IsAlwaysUnique>
             <UseDefault>false</UseDefault>
-            <ValueDistributionMode>Random</ValueDistributionMode>
+            <ValueDistributionMode>Sequential</ValueDistributionMode>
             <SeedValue>11</SeedValue>
-            <SequentialValueTicks>864000000000</SequentialValueTicks>
+            <SequentialValueTicks>2592000000000</SequentialValueTicks>
             <DateTimeRange>MinMaxDate</DateTimeRange>
             <OffsetFromColumnMinDays>0</OffsetFromColumnMinDays>
             <OffsetFromColumnMaxDays>7</OffsetFromColumnMaxDays>
             <OffsetFromColumnMinTime />
             <OffsetFromColumnMaxTime />
-            <MinDate>1970-01-01T00:00:00</MinDate>
-            <MaxDate>2015-10-10T00:00:00+03:00</MaxDate>
+            <MinDate>2000-01-02T00:00:00+03:00</MinDate>
+            <MaxDate>2009-12-31T00:00:00+03:00</MaxDate>
             <IsRandomizeDate>true</IsRandomizeDate>
           </GeneratorOptions>
           <GeneratorType>MySqlDateGenerator</GeneratorType>
@@ -492,142 +516,214 @@
         <Column Name="end_expected">
           <Checked>true</Checked>
           <DataType>DATE</DataType>
+          <GeneratorOptions xsi:type="DateGeneratorOptions">
+            <RowsCountToGenerate>50</RowsCountToGenerate>
+            <AllowNulls>false</AllowNulls>
+            <NullProportion>10</NullProportion>
+            <Unique>false</Unique>
+            <IsAlwaysUnique>false</IsAlwaysUnique>
+            <UseDefault>false</UseDefault>
+            <ValueDistributionMode>Random</ValueDistributionMode>
+            <SeedValue>12</SeedValue>
+            <SequentialValueTicks>864000000000</SequentialValueTicks>
+            <DateTimeRange>MinMaxDate</DateTimeRange>
+            <OffsetFromColumnMinDays>0</OffsetFromColumnMinDays>
+            <OffsetFromColumnMaxDays>7</OffsetFromColumnMaxDays>
+            <OffsetFromColumnMinTime />
+            <OffsetFromColumnMaxTime />
+            <MinDate>2010-01-01T00:00:00</MinDate>
+            <MaxDate>2014-12-31T00:00:00+03:00</MaxDate>
+            <IsRandomizeDate>true</IsRandomizeDate>
+          </GeneratorOptions>
+          <GeneratorType>MySqlDateGenerator</GeneratorType>
+          <GeneratorName>date</GeneratorName>
+          <GeneratorDescription>fill with date values</GeneratorDescription>
         </Column>
         <Column Name="end_actually">
           <Checked>true</Checked>
           <DataType>DATE</DataType>
+          <GeneratorOptions xsi:type="DateGeneratorOptions">
+            <RowsCountToGenerate>50</RowsCountToGenerate>
+            <AllowNulls>true</AllowNulls>
+            <NullProportion>30</NullProportion>
+            <Unique>false</Unique>
+            <IsAlwaysUnique>false</IsAlwaysUnique>
+            <UseDefault>false</UseDefault>
+            <ValueDistributionMode>Random</ValueDistributionMode>
+            <SeedValue>13</SeedValue>
+            <SequentialValueTicks>864000000000</SequentialValueTicks>
+            <DateTimeRange>MinMaxDate</DateTimeRange>
+            <OffsetFromColumnMinDays>0</OffsetFromColumnMinDays>
+            <OffsetFromColumnMaxDays>7</OffsetFromColumnMaxDays>
+            <OffsetFromColumnMinTime />
+            <OffsetFromColumnMaxTime />
+            <MinDate>2010-01-01T00:00:00</MinDate>
+            <MaxDate>2015-10-13T00:00:00+03:00</MaxDate>
+            <IsRandomizeDate>true</IsRandomizeDate>
+          </GeneratorOptions>
+          <GeneratorType>MySqlDateGenerator</GeneratorType>
+          <GeneratorName>date</GeneratorName>
+          <GeneratorDescription>fill with date values</GeneratorDescription>
         </Column>
       </Columns>
     </Table>
     <Table Name="object_contact">
-      <Checked>false</Checked>
+      <Checked>true</Checked>
       <Settings>
         <RowsToGenerate>1000</RowsToGenerate>
         <Truncate>true</Truncate>
       </Settings>
       <Columns>
         <Column Name="object_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
+          <GeneratorOptions xsi:type="ForeignKeyGeneratorOptions">
+            <Unique>true</Unique>
+            <IsAlwaysUnique>false</IsAlwaysUnique>
+            <AllowNulls>false</AllowNulls>
+            <NullProportion>0</NullProportion>
+            <ValueDistributionMode>Random</ValueDistributionMode>
+            <SeedValue>14</SeedValue>
+            <RepeatValues>false</RepeatValues>
+            <FromTimes>1</FromTimes>
+            <ToTimes>10</ToTimes>
+          </GeneratorOptions>
+          <GeneratorType>ForeignKeyGenerator</GeneratorType>
+          <GeneratorName>Foreign Key (auto assigned)</GeneratorName>
+          <GeneratorDescription>references a column from parent table</GeneratorDescription>
           <HasForeignKey>true</HasForeignKey>
           <Precision>10</Precision>
         </Column>
         <Column Name="contact_data_type_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
+          <GeneratorOptions xsi:type="ForeignKeyGeneratorOptions">
+            <Unique>true</Unique>
+            <IsAlwaysUnique>false</IsAlwaysUnique>
+            <AllowNulls>false</AllowNulls>
+            <NullProportion>0</NullProportion>
+            <ValueDistributionMode>Random</ValueDistributionMode>
+            <SeedValue>15</SeedValue>
+            <RepeatValues>false</RepeatValues>
+            <FromTimes>1</FromTimes>
+            <ToTimes>10</ToTimes>
+          </GeneratorOptions>
+          <GeneratorType>ForeignKeyGenerator</GeneratorType>
+          <GeneratorName>Foreign Key (auto assigned)</GeneratorName>
+          <GeneratorDescription>references a column from parent table</GeneratorDescription>
           <HasForeignKey>true</HasForeignKey>
           <Precision>10</Precision>
         </Column>
         <Column Name="data">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>VARCHAR</DataType>
           <Length>100</Length>
         </Column>
       </Columns>
     </Table>
     <Table Name="payment">
-      <Checked>false</Checked>
+      <Checked>true</Checked>
       <Settings>
         <RowsToGenerate>1000</RowsToGenerate>
         <Truncate>true</Truncate>
       </Settings>
       <Columns>
         <Column Name="payment_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <Precision>10</Precision>
         </Column>
         <Column Name="object_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <HasForeignKey>true</HasForeignKey>
           <Precision>10</Precision>
         </Column>
         <Column Name="contract_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <Precision>10</Precision>
         </Column>
         <Column Name="amount">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>DECIMAL</DataType>
           <Scale>2</Scale>
           <Precision>12</Precision>
         </Column>
         <Column Name="date">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>DATETIME</DataType>
         </Column>
       </Columns>
     </Table>
     <Table Name="work_task">
-      <Checked>false</Checked>
+      <Checked>true</Checked>
       <Settings>
         <RowsToGenerate>1000</RowsToGenerate>
         <Truncate>true</Truncate>
       </Settings>
       <Columns>
         <Column Name="work_task_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <Precision>10</Precision>
         </Column>
         <Column Name="object_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <HasForeignKey>true</HasForeignKey>
           <Precision>10</Precision>
         </Column>
         <Column Name="employee_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <HasForeignKey>true</HasForeignKey>
           <Precision>10</Precision>
         </Column>
         <Column Name="profession_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <HasForeignKey>true</HasForeignKey>
           <Precision>10</Precision>
         </Column>
         <Column Name="piece_rate_pay">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>BOOL</DataType>
           <Precision>1</Precision>
         </Column>
         <Column Name="price_per_meter">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>DECIMAL</DataType>
           <Scale>2</Scale>
           <Precision>5</Precision>
         </Column>
         <Column Name="number_of_metres">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>DECIMAL</DataType>
           <Scale>2</Scale>
           <Precision>6</Precision>
         </Column>
         <Column Name="progress_percent">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <Precision>5</Precision>
         </Column>
         <Column Name="description">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>VARCHAR</DataType>
           <Length>100</Length>
         </Column>
       </Columns>
     </Table>
     <Table Name="cost">
-      <Checked>false</Checked>
+      <Checked>true</Checked>
       <Settings>
         <RowsToGenerate>3000</RowsToGenerate>
         <Truncate>true</Truncate>
       </Settings>
       <Columns>
         <Column Name="cost_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="MySqlUnsignedIntegerGeneratorOptions">
             <RowsCountToGenerate>50</RowsCountToGenerate>
@@ -650,7 +746,7 @@
           <Precision>10</Precision>
         </Column>
         <Column Name="material_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="ForeignKeyGeneratorOptions">
             <Unique>false</Unique>
@@ -670,7 +766,7 @@
           <Precision>10</Precision>
         </Column>
         <Column Name="work_task_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="ForeignKeyGeneratorOptions">
             <Unique>false</Unique>
@@ -690,7 +786,7 @@
           <Precision>10</Precision>
         </Column>
         <Column Name="price">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>DECIMAL</DataType>
           <GeneratorOptions xsi:type="DecimalGeneratorOptions">
             <RowsCountToGenerate>50</RowsCountToGenerate>
@@ -714,7 +810,7 @@
           <Precision>8</Precision>
         </Column>
         <Column Name="quantity">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>DECIMAL</DataType>
           <GeneratorOptions xsi:type="DecimalGeneratorOptions">
             <RowsCountToGenerate>50</RowsCountToGenerate>
@@ -738,7 +834,7 @@
           <Precision>8</Precision>
         </Column>
         <Column Name="date">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>DATETIME</DataType>
           <GeneratorOptions xsi:type="MySqlDateTimeGeneratorOptions">
             <RowsCountToGenerate>50</RowsCountToGenerate>
@@ -747,7 +843,7 @@
             <Unique>false</Unique>
             <IsAlwaysUnique>false</IsAlwaysUnique>
             <UseDefault>false</UseDefault>
-            <ValueDistributionMode>Seed</ValueDistributionMode>
+            <ValueDistributionMode>Random</ValueDistributionMode>
             <SeedValue>7</SeedValue>
             <SequentialValueTicks>1512000000000</SequentialValueTicks>
             <DateTimeRange>MinMaxDate</DateTimeRange>
@@ -767,7 +863,7 @@
           <GeneratorDescription>fill with date and time with fractional seconds values</GeneratorDescription>
         </Column>
         <Column Name="is_planned_costs">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>BOOL</DataType>
           <GeneratorOptions xsi:type="BitGeneratorOptions">
             <RowsCountToGenerate>50</RowsCountToGenerate>
@@ -777,7 +873,7 @@
             <ValueDistributionMode>Random</ValueDistributionMode>
             <SeedValue>7</SeedValue>
             <TrueProbability>0.88</TrueProbability>
-            <Unique>true</Unique>
+            <Unique>false</Unique>
             <IsAlwaysUnique>false</IsAlwaysUnique>
           </GeneratorOptions>
           <GeneratorType>MySqlBoolGenerator</GeneratorType>
@@ -788,29 +884,29 @@
       </Columns>
     </Table>
     <Table Name="salary">
-      <Checked>false</Checked>
+      <Checked>true</Checked>
       <Settings>
         <RowsToGenerate>1000</RowsToGenerate>
         <Truncate>true</Truncate>
       </Settings>
       <Columns>
         <Column Name="salary_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <Precision>10</Precision>
         </Column>
         <Column Name="work_task_id">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>INT</DataType>
           <HasForeignKey>true</HasForeignKey>
           <Precision>10</Precision>
         </Column>
         <Column Name="date">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>DATE</DataType>
         </Column>
         <Column Name="amount">
-          <Checked>false</Checked>
+          <Checked>true</Checked>
           <DataType>DECIMAL</DataType>
           <Scale>3</Scale>
           <Precision>8</Precision>
