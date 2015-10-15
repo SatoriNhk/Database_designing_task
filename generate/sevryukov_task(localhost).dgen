@@ -67,7 +67,7 @@
           <Checked>true</Checked>
           <DataType>VARCHAR</DataType>
           <GeneratorOptions xsi:type="TextFileGeneratorOptions">
-            <RowsCountToGenerate>50</RowsCountToGenerate>
+            <RowsCountToGenerate>60</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>10</NullProportion>
             <AllowEmptyStrings>false</AllowEmptyStrings>
@@ -92,7 +92,7 @@
     <Table Name="payment_type">
       <Checked>true</Checked>
       <Settings>
-        <RowsToGenerate>1000</RowsToGenerate>
+        <RowsToGenerate>5</RowsToGenerate>
         <Truncate>true</Truncate>
       </Settings>
       <Columns>
@@ -100,7 +100,7 @@
           <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="MySqlUnsignedIntegerGeneratorOptions">
-            <RowsCountToGenerate>50</RowsCountToGenerate>
+            <RowsCountToGenerate>5</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>true</Unique>
@@ -123,7 +123,7 @@
           <Checked>true</Checked>
           <DataType>VARCHAR</DataType>
           <GeneratorOptions xsi:type="TextFileGeneratorOptions">
-            <RowsCountToGenerate>50</RowsCountToGenerate>
+            <RowsCountToGenerate>5</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <AllowEmptyStrings>false</AllowEmptyStrings>
@@ -156,7 +156,7 @@
           <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="MySqlUnsignedIntegerGeneratorOptions">
-            <RowsCountToGenerate>50</RowsCountToGenerate>
+            <RowsCountToGenerate>75</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>true</Unique>
@@ -199,7 +199,7 @@
           <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="MySqlUnsignedIntegerGeneratorOptions">
-            <RowsCountToGenerate>50</RowsCountToGenerate>
+            <RowsCountToGenerate>75</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>10</NullProportion>
             <Unique>false</Unique>
@@ -221,7 +221,7 @@
           <Checked>true</Checked>
           <DataType>BOOL</DataType>
           <GeneratorOptions xsi:type="BitGeneratorOptions">
-            <RowsCountToGenerate>50</RowsCountToGenerate>
+            <RowsCountToGenerate>75</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <UseDefault>false</UseDefault>
@@ -289,7 +289,7 @@
           <Checked>true</Checked>
           <DataType>DATETIME</DataType>
           <GeneratorOptions xsi:type="MySqlDateTimeGeneratorOptions">
-            <RowsCountToGenerate>50</RowsCountToGenerate>
+            <RowsCountToGenerate>75</RowsCountToGenerate>
             <AllowNulls>true</AllowNulls>
             <NullProportion>10</NullProportion>
             <Unique>true</Unique>
@@ -331,7 +331,7 @@
           <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="MySqlUnsignedIntegerGeneratorOptions">
-            <RowsCountToGenerate>50</RowsCountToGenerate>
+            <RowsCountToGenerate>1000</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>true</Unique>
@@ -353,20 +353,23 @@
         <Column Name="payment_type_id">
           <Checked>true</Checked>
           <DataType>INT</DataType>
-          <GeneratorOptions xsi:type="ForeignKeyGeneratorOptions">
-            <Unique>false</Unique>
-            <IsAlwaysUnique>false</IsAlwaysUnique>
+          <GeneratorOptions xsi:type="MySqlUnsignedIntegerGeneratorOptions">
+            <RowsCountToGenerate>1000</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
+            <Unique>false</Unique>
+            <IsAlwaysUnique>false</IsAlwaysUnique>
+            <Increment xsi:type="xsd:int">1</Increment>
             <ValueDistributionMode>Random</ValueDistributionMode>
             <SeedValue>6</SeedValue>
-            <RepeatValues>false</RepeatValues>
-            <FromTimes>1</FromTimes>
-            <ToTimes>10</ToTimes>
+            <MinValue>1</MinValue>
+            <MaxValue>5</MaxValue>
+            <UseDefault>false</UseDefault>
+            <DefaultValue />
           </GeneratorOptions>
-          <GeneratorType>ForeignKeyGenerator</GeneratorType>
-          <GeneratorName>Foreign Key (auto assigned)</GeneratorName>
-          <GeneratorDescription>references a column from parent table</GeneratorDescription>
+          <GeneratorType>MySqlUnsignedIntegerGenerator</GeneratorType>
+          <GeneratorName>int unsigned</GeneratorName>
+          <GeneratorDescription>fill with 32-bit unsigned integer values</GeneratorDescription>
           <HasForeignKey>true</HasForeignKey>
           <Precision>10</Precision>
         </Column>
@@ -394,7 +397,7 @@
           <Checked>true</Checked>
           <DataType>DECIMAL</DataType>
           <GeneratorOptions xsi:type="DecimalGeneratorOptions">
-            <RowsCountToGenerate>50</RowsCountToGenerate>
+            <RowsCountToGenerate>1000</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>false</Unique>
@@ -418,7 +421,7 @@
           <Checked>true</Checked>
           <DataType>DATETIME</DataType>
           <GeneratorOptions xsi:type="MySqlDateTimeGeneratorOptions">
-            <RowsCountToGenerate>50</RowsCountToGenerate>
+            <RowsCountToGenerate>1000</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>false</Unique>
