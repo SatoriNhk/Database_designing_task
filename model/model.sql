@@ -1,3 +1,10 @@
+-- MySQL Workbench Synchronization
+-- Generated: 2015-10-19 23:59
+-- Model: New Model
+-- Version: 1.0
+-- Project: Name of the project
+-- Author: Роман
+
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
@@ -7,7 +14,6 @@ CREATE SCHEMA IF NOT EXISTS `sevryukov_task` DEFAULT CHARACTER SET utf8 COLLATE 
 CREATE TABLE IF NOT EXISTS `sevryukov_task`.`object` (
   `object_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
   `client_id` INT(10) UNSIGNED NOT NULL COMMENT '',
-  `margin` INT(3) UNSIGNED NULL DEFAULT NULL COMMENT '',
   `finished` TINYINT(1) NOT NULL COMMENT '',
   PRIMARY KEY (`object_id`)  COMMENT '',
   INDEX `fk_object_client1_idx` (`client_id` ASC)  COMMENT '',
@@ -88,6 +94,18 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
+CREATE TABLE IF NOT EXISTS `sevryukov_task`.`generate` (
+  `generate_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
+  `generate_type_id` INT(11) NOT NULL COMMENT '',
+  `date_start` DATETIME NOT NULL COMMENT '',
+  `date_end` DATETIME NOT NULL COMMENT '',
+  `margin` INT(11) NOT NULL COMMENT '',
+  `amount` DECIMAL(12,2) NOT NULL COMMENT '',
+  PRIMARY KEY (`generate_id`)  COMMENT '')
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
 
 DELIMITER $$
 
@@ -97,34 +115,105 @@ BEGIN
 DECLARE income decimal(12,2);
 DECLARE outcome decimal(12,2);
 DECLARE balance decimal(12,2);
-DECLARE margin int(3);
+DECLARE amount decimal(12,2);
+DECLARE marg int(3);
+DECLARE start_date datetime;
+DECLARE end_date datetime;
+DECLARE generate_type int(2);
 
-select object.margin from object where object_id = NEW.object_id into margin;
+select generate_type_id from generate  ORDER BY generate_id DESC limit 1 into generate_type;
+select date_start from generate ORDER BY generate_id DESC limit 1 into start_date;
+select date_end from generate ORDER BY generate_id DESC limit 1 into end_date;
+select amount from generate ORDER BY generate_id DESC limit 1 into amount;
+select margin from generate ORDER BY generate_id DESC limit 1 into marg;
 
-select 	sum(amount) 
-from payment 
-where payment_type_id = 3 AND object_id = NEW.object_id group by object_id
-into income;
+if(generate_type = 1)  then
+	begin
+		select 	sum(amount) 
+		from payment 
+		where payment_type_id = 3
+		into income;
 
-select sum(amount)
-from payment 
-where payment_type_id !=3 AND object_id = NEW.object_id group by object_id
-into outcome;
-select income - outcome into balance;
+		select sum(amount)
+		from payment 
+		where payment_type_id !=3 
+		into outcome;
 
-if( (balance - NEW.amount)/(outcome) < margin/100 - 0.009 AND NEW.payment_type_id != 3) then
-	set NEW.payment_type_id = 3;
-	if( (balance + NEW.amount)/outcome > margin/100 + 0.009) then
-		set NEW.amount = outcome/100*(margin+0.09)-balance;
-	end if;
+		select income - outcome into balance;
+
+		if( (balance - NEW.amount)/(outcome) < marg/100 - 0.009 AND NEW.payment_type_id != 3) then
+			set NEW.payment_type_id = 3;
+			if( (balance + NEW.amount)/outcome > marg/100 + 0.009) then
+				set NEW.amount = outcome/100*(marg+0.09)-balance;
+			end if;
+		end if;
+
+		if((balance + NEW.amount)/(outcome) > marg/100 + 0.009 AND NEW.payment_type_id = 3) then
+			set NEW.payment_type_id = 1;
+			if( (balance - NEW.amount)/outcome < marg/100 - 0.009) then
+				set NEW.amount = balance - outcome/100*(marg-0.09);
+			end if;
+		end if;
+    end;
 end if;
-if((balance + NEW.amount)/(outcome) > margin/100 + 0.009 AND NEW.payment_type_id = 3) then
-	set NEW.payment_type_id = 1;
-    if( (balance - NEW.amount)/outcome < margin/100 - 0.009) then
-		set NEW.amount = balance - outcome/100*(margin-0.09);
-	end if;
-end if;
+if (generate_type = 2) then
+    begin
+		select 	sum(amount) 
+		from payment 
+		where payment_type_id = 3 and payment.date between start_date and end_date
+		into income;
 
+		select sum(amount)
+		from payment 
+		where payment_type_id !=3 and payment.date between start_date and end_date
+		into outcome;
+
+		select income - outcome into balance;
+
+		if( (balance - NEW.amount)/(outcome) < marg/100 - 0.009 AND NEW.payment_type_id != 3) then
+			set NEW.payment_type_id = 3;
+			if( (balance + NEW.amount)/outcome > marg/100 + 0.009) then
+				set NEW.amount = outcome/100*(marg+0.09)-balance;
+			end if;
+		end if;
+
+		if((balance + NEW.amount)/(outcome) > marg/100 + 0.009 AND NEW.payment_type_id = 3) then
+			set NEW.payment_type_id = 1;
+			if( (balance - NEW.amount)/outcome < marg/100 - 0.009) then
+				set NEW.amount = balance - outcome/100*(marg-0.09);
+			end if;
+		end if;
+	end;
+end if;
+if (generate_type = 3) then
+    begin
+		select 	sum(amount) 
+		from payment 
+		where payment_type_id = 3 
+		into income;
+
+		select sum(amount)
+		from payment 
+		where payment_type_id !=3 
+		into outcome;
+
+		select income - outcome into balance;
+
+		if( balance - NEW.amount < amount*0.99 AND NEW.payment_type_id != 3) then
+			set NEW.payment_type_id = 3;
+			if( balance + NEW.amount > amount*1.01) then
+				set NEW.amount = amount*1.0085 - balance;
+			end if;
+		end if;
+
+		if( balance + NEW.amount > amount*1.01 AND NEW.payment_type_id = 3) then
+			set NEW.payment_type_id = 1;
+			if( balance - NEW.amount < amount*0.99) then
+				set NEW.amount = balance - amount*0.995;
+			end if;
+		end if;
+    end;
+end if;
 END$$
 
 

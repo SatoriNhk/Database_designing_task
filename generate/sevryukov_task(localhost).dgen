@@ -89,6 +89,166 @@
         </Column>
       </Columns>
     </Table>
+    <Table Name="generate">
+      <Checked>true</Checked>
+      <Settings>
+        <RowsToGenerate>1</RowsToGenerate>
+        <Truncate>true</Truncate>
+      </Settings>
+      <Columns>
+        <Column Name="generate_id">
+          <Checked>true</Checked>
+          <DataType>INT</DataType>
+          <GeneratorOptions xsi:type="MySqlUnsignedIntegerGeneratorOptions">
+            <RowsCountToGenerate>1</RowsCountToGenerate>
+            <AllowNulls>false</AllowNulls>
+            <NullProportion>0</NullProportion>
+            <Unique>true</Unique>
+            <IsAlwaysUnique>false</IsAlwaysUnique>
+            <Increment xsi:type="xsd:unsignedInt">1</Increment>
+            <ValueDistributionMode>Sequential</ValueDistributionMode>
+            <SeedValue>5</SeedValue>
+            <MinValue>1</MinValue>
+            <MaxValue>4294967295</MaxValue>
+            <UseDefault>false</UseDefault>
+            <DefaultValue />
+          </GeneratorOptions>
+          <GeneratorType>MySqlUnsignedIntegerGenerator</GeneratorType>
+          <GeneratorName>ID (sequential)</GeneratorName>
+          <GeneratorDescription>1, 2, 3, 4, ..., 9, 10, 11, 12, ...</GeneratorDescription>
+          <GeneratorCategory>Business</GeneratorCategory>
+          <Precision>10</Precision>
+        </Column>
+        <Column Name="generate_type_id">
+          <Checked>true</Checked>
+          <DataType>INT</DataType>
+          <GeneratorOptions xsi:type="MySqlIntegerGeneratorOptions">
+            <RowsCountToGenerate>1</RowsCountToGenerate>
+            <AllowNulls>false</AllowNulls>
+            <NullProportion>0</NullProportion>
+            <Unique>false</Unique>
+            <IsAlwaysUnique>false</IsAlwaysUnique>
+            <Increment xsi:type="xsd:int">1</Increment>
+            <ValueDistributionMode>Sequential</ValueDistributionMode>
+            <SeedValue>6</SeedValue>
+            <MinValue>1</MinValue>
+            <MaxValue>1</MaxValue>
+            <UseDefault>false</UseDefault>
+            <DefaultValue />
+          </GeneratorOptions>
+          <GeneratorType>MySqlIntegerGenerator</GeneratorType>
+          <GeneratorName>ID (sequential)</GeneratorName>
+          <GeneratorDescription>1, 2, 3, 4, ..., 9, 10, 11, 12, ...</GeneratorDescription>
+          <GeneratorCategory>Business</GeneratorCategory>
+          <Precision>11</Precision>
+        </Column>
+        <Column Name="date_start">
+          <Checked>true</Checked>
+          <DataType>DATETIME</DataType>
+          <GeneratorOptions xsi:type="MySqlDateTimeGeneratorOptions">
+            <RowsCountToGenerate>1</RowsCountToGenerate>
+            <AllowNulls>false</AllowNulls>
+            <NullProportion>0</NullProportion>
+            <Unique>false</Unique>
+            <IsAlwaysUnique>false</IsAlwaysUnique>
+            <UseDefault>false</UseDefault>
+            <ValueDistributionMode>Random</ValueDistributionMode>
+            <SeedValue>5</SeedValue>
+            <SequentialValueTicks>864000000000</SequentialValueTicks>
+            <DateTimeRange>MinMaxDate</DateTimeRange>
+            <OffsetFromColumnMinDays>0</OffsetFromColumnMinDays>
+            <OffsetFromColumnMaxDays>7</OffsetFromColumnMaxDays>
+            <OffsetFromColumnMinTime />
+            <OffsetFromColumnMaxTime />
+            <MinDate>2000-01-01T00:00:00</MinDate>
+            <MaxDate>2014-10-15T00:00:00+04:00</MaxDate>
+            <IsRandomizeDate>true</IsRandomizeDate>
+            <IsRandomizeTime>true</IsRandomizeTime>
+            <MaxTime>863990000000</MaxTime>
+            <MinTime>10000000</MinTime>
+          </GeneratorOptions>
+          <GeneratorType>MySqlDateTimeGenerator</GeneratorType>
+          <GeneratorName>datetime</GeneratorName>
+          <GeneratorDescription>fill with date and time with fractional seconds values</GeneratorDescription>
+        </Column>
+        <Column Name="date_end">
+          <Checked>true</Checked>
+          <DataType>DATETIME</DataType>
+          <GeneratorOptions xsi:type="MySqlDateTimeGeneratorOptions">
+            <RowsCountToGenerate>1</RowsCountToGenerate>
+            <AllowNulls>false</AllowNulls>
+            <NullProportion>0</NullProportion>
+            <Unique>false</Unique>
+            <IsAlwaysUnique>false</IsAlwaysUnique>
+            <UseDefault>false</UseDefault>
+            <ValueDistributionMode>Random</ValueDistributionMode>
+            <SeedValue>6</SeedValue>
+            <SequentialValueTicks>864000000000</SequentialValueTicks>
+            <DateTimeRange>OffsetFromColumn</DateTimeRange>
+            <SelectedColumn>date_start</SelectedColumn>
+            <OffsetFromColumnMinDays>365</OffsetFromColumnMinDays>
+            <OffsetFromColumnMaxDays>365</OffsetFromColumnMaxDays>
+            <OffsetFromColumnMinTime />
+            <OffsetFromColumnMaxTime />
+            <MinDate>1000-01-01T00:00:00</MinDate>
+            <MaxDate>2015-10-19T00:00:00+03:00</MaxDate>
+            <IsRandomizeDate>true</IsRandomizeDate>
+            <IsRandomizeTime>true</IsRandomizeTime>
+            <MaxTime>863990000000</MaxTime>
+            <MinTime>10000000</MinTime>
+          </GeneratorOptions>
+          <GeneratorType>MySqlDateTimeGenerator</GeneratorType>
+          <GeneratorName>datetime</GeneratorName>
+          <GeneratorDescription>fill with date and time with fractional seconds values</GeneratorDescription>
+        </Column>
+        <Column Name="margin">
+          <Checked>true</Checked>
+          <DataType>INT</DataType>
+          <GeneratorOptions xsi:type="ConstantGeneratorOptions">
+            <RowsCountToGenerate>1</RowsCountToGenerate>
+            <AllowNulls>false</AllowNulls>
+            <NullProportion>0</NullProportion>
+            <Unique>false</Unique>
+            <IsAlwaysUnique>false</IsAlwaysUnique>
+            <ValueDistributionMode>Random</ValueDistributionMode>
+            <SeedValue>5</SeedValue>
+            <AllowEmptyStrings>false</AllowEmptyStrings>
+            <EmptyStringProportion>10</EmptyStringProportion>
+            <ConstantDistributionMode>UserDefined</ConstantDistributionMode>
+            <UserDefinedConstant xsi:type="xsd:decimal">10</UserDefinedConstant>
+            <ColumnDefaultConstant />
+          </GeneratorOptions>
+          <GeneratorType>MySqlConstantGenerator</GeneratorType>
+          <GeneratorName>Constant</GeneratorName>
+          <GeneratorDescription>fill with a constant or column default value</GeneratorDescription>
+          <Precision>11</Precision>
+        </Column>
+        <Column Name="amount">
+          <Checked>true</Checked>
+          <DataType>DECIMAL</DataType>
+          <GeneratorOptions xsi:type="DecimalGeneratorOptions">
+            <RowsCountToGenerate>1</RowsCountToGenerate>
+            <AllowNulls>false</AllowNulls>
+            <NullProportion>0</NullProportion>
+            <Unique>false</Unique>
+            <IsAlwaysUnique>false</IsAlwaysUnique>
+            <Increment xsi:type="xsd:decimal">1</Increment>
+            <ValueDistributionMode>Seed</ValueDistributionMode>
+            <SeedValue>5</SeedValue>
+            <MinValue>-1000000</MinValue>
+            <MaxValue>1000000</MaxValue>
+            <UseDefault>false</UseDefault>
+            <DefaultValue />
+          </GeneratorOptions>
+          <GeneratorType>MySqlDecimalGenerator</GeneratorType>
+          <GeneratorName>Product Quantity</GeneratorName>
+          <GeneratorDescription>9, 24, 89, 35, ...</GeneratorDescription>
+          <GeneratorCategory>Product</GeneratorCategory>
+          <Scale>2</Scale>
+          <Precision>12</Precision>
+        </Column>
+      </Columns>
+    </Table>
     <Table Name="payment_type">
       <Checked>true</Checked>
       <Settings>
@@ -194,28 +354,6 @@
           <GeneratorDescription>references a column from parent table</GeneratorDescription>
           <HasForeignKey>true</HasForeignKey>
           <Precision>10</Precision>
-        </Column>
-        <Column Name="margin">
-          <Checked>true</Checked>
-          <DataType>INT</DataType>
-          <GeneratorOptions xsi:type="ConstantGeneratorOptions">
-            <RowsCountToGenerate>75</RowsCountToGenerate>
-            <AllowNulls>false</AllowNulls>
-            <NullProportion>10</NullProportion>
-            <Unique>false</Unique>
-            <IsAlwaysUnique>false</IsAlwaysUnique>
-            <ValueDistributionMode>Random</ValueDistributionMode>
-            <SeedValue>5</SeedValue>
-            <AllowEmptyStrings>false</AllowEmptyStrings>
-            <EmptyStringProportion>10</EmptyStringProportion>
-            <ConstantDistributionMode>UserDefined</ConstantDistributionMode>
-            <UserDefinedConstant xsi:type="xsd:decimal">10</UserDefinedConstant>
-            <ColumnDefaultConstant>NULL</ColumnDefaultConstant>
-          </GeneratorOptions>
-          <GeneratorType>MySqlConstantGenerator</GeneratorType>
-          <GeneratorName>Constant</GeneratorName>
-          <GeneratorDescription>fill with a constant or column default value</GeneratorDescription>
-          <Precision>3</Precision>
         </Column>
         <Column Name="finished">
           <Checked>true</Checked>
@@ -323,7 +461,7 @@
     <Table Name="payment">
       <Checked>true</Checked>
       <Settings>
-        <RowsToGenerate>10000</RowsToGenerate>
+        <RowsToGenerate>1000</RowsToGenerate>
         <Truncate>true</Truncate>
       </Settings>
       <Columns>
@@ -331,7 +469,7 @@
           <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="MySqlUnsignedIntegerGeneratorOptions">
-            <RowsCountToGenerate>10000</RowsCountToGenerate>
+            <RowsCountToGenerate>1000</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>true</Unique>
@@ -354,7 +492,7 @@
           <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="MySqlUnsignedIntegerGeneratorOptions">
-            <RowsCountToGenerate>10000</RowsCountToGenerate>
+            <RowsCountToGenerate>1000</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>false</Unique>
@@ -377,7 +515,7 @@
           <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="MySqlUnsignedIntegerGeneratorOptions">
-            <RowsCountToGenerate>10000</RowsCountToGenerate>
+            <RowsCountToGenerate>1000</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>false</Unique>
@@ -400,7 +538,7 @@
           <Checked>true</Checked>
           <DataType>DECIMAL</DataType>
           <GeneratorOptions xsi:type="DecimalGeneratorOptions">
-            <RowsCountToGenerate>10000</RowsCountToGenerate>
+            <RowsCountToGenerate>1000</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>true</Unique>
@@ -424,7 +562,7 @@
           <Checked>true</Checked>
           <DataType>DATETIME</DataType>
           <GeneratorOptions xsi:type="MySqlDateTimeGeneratorOptions">
-            <RowsCountToGenerate>10000</RowsCountToGenerate>
+            <RowsCountToGenerate>1000</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>false</Unique>

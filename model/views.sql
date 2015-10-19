@@ -10,14 +10,12 @@ where payment_type_id != 3
 group by object_id;
  
 create or replace view get_balance as 
-select o.object_id, p1.Summa1 - p2.Summa2 as balance 
+select o.object_id, p1.Summa1 - p2.Summa2 as balance, p1.Summa1 + p2.Summa2 as cash_turnover, (p1.Summa1 - p2.Summa2) /  p2.Summa2 * 100 as margin
 from object o 
 join income p1 
 	on o.object_id = p1.object_id
 join outcome p2 
 	on o.object_id = p2.object_id;
-
-
 
 create or replace view income_finished 
 as select object_id, sum(amount) Summa1 
@@ -63,3 +61,18 @@ join get_balance_finished gbf
 group by foreman.foreman_id
 order by Profit DESC;
 
+create or replace view income_full
+as select sum(amount) Summa 
+from payment 
+where payment_type_id = 3;
+
+create or replace view outcome_full as 
+select sum(amount) Summa
+from payment 
+where payment_type_id != 3;
+
+create or replace view get_balance_full as 
+select income_full.Summa - outcome_full.Summa as balance, income_full.Summa + outcome_full.Summa as cash_turnover, (income_full.Summa - outcome_full.Summa) /  outcome_full.Summa * 100 as margin_actual, generate.generate_type_id, generate.margin, generate.date_start,generate.date_end,generate.amount
+from income_full, outcome_full, generate;
+
+select * from get_balance_full
