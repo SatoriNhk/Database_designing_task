@@ -5,7 +5,6 @@ CREATE PROCEDURE `test_views`()
 Begin
 DECLARE total int;
 DECLARE i int;
-DECLARE pass bool;
 DECLARE temp varchar (64);
 SET i=0;
 SELECT count(*) INTO total FROM  information_schema.views where TABLE_SCHEMA='sevryukov_task';
