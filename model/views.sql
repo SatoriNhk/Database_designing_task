@@ -1,3 +1,4 @@
+use sevryukov_task;
 create or replace view income 
 as select object_id, sum(amount) summa1 
 from payment 
@@ -44,11 +45,6 @@ join outcome_finished outc
 	on o.object_id = outc.object_id;
     
 
-
-select * from get_balance
-left join get_balance_finished 
-on get_balance.object_id = get_balance_finished .object_id;
-
 create or replace view top_foreman as
 select foreman.foreman_id as ForemanID, foreman.name as Surname, sum(gbf.balance) as Profit
 from foreman
@@ -76,12 +72,10 @@ select income_full.summa - outcome_full.summa as balance,
 	income_full.summa + outcome_full.summa as cash_turnover, 
 	(income_full.summa - outcome_full.summa) /  outcome_full.summa * 100 as margin_actual,
 	generate.generate_type_id, 
-	generate.margin, generate.date_start,
-	generate.date_end,
+    generate.margin,
 	generate.amount
 from income_full, outcome_full, generate;
 
-select * from get_balance_full;
 
 create or replace view income_full_time_period
 as select sum(amount) summa 
@@ -107,4 +101,3 @@ select income_full_time_period.summa - outcome_full_time_period.summa as balance
 	generate.amount
 from income_full_time_period, outcome_full_time_period, generate;
 
-select * from get_balance_full_time_period

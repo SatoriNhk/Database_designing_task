@@ -214,7 +214,7 @@
             <AllowEmptyStrings>false</AllowEmptyStrings>
             <EmptyStringProportion>10</EmptyStringProportion>
             <ConstantDistributionMode>UserDefined</ConstantDistributionMode>
-            <UserDefinedConstant xsi:type="xsd:decimal">-10</UserDefinedConstant>
+            <UserDefinedConstant xsi:type="xsd:decimal">10</UserDefinedConstant>
             <ColumnDefaultConstant />
           </GeneratorOptions>
           <GeneratorType>MySqlConstantGenerator</GeneratorType>
@@ -234,7 +234,7 @@
             <Increment xsi:type="xsd:decimal">1</Increment>
             <ValueDistributionMode>Random</ValueDistributionMode>
             <SeedValue>6</SeedValue>
-            <MinValue>-1000</MinValue>
+            <MinValue>10</MinValue>
             <MaxValue>1000</MaxValue>
             <UseDefault>false</UseDefault>
             <DefaultValue />
@@ -468,7 +468,7 @@
           <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="MySqlUnsignedIntegerGeneratorOptions">
-            <RowsCountToGenerate>5000</RowsCountToGenerate>
+            <RowsCountToGenerate>50</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>true</Unique>
@@ -491,7 +491,7 @@
           <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="MySqlUnsignedIntegerGeneratorOptions">
-            <RowsCountToGenerate>5000</RowsCountToGenerate>
+            <RowsCountToGenerate>50</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>false</Unique>
@@ -514,7 +514,7 @@
           <Checked>true</Checked>
           <DataType>INT</DataType>
           <GeneratorOptions xsi:type="MySqlUnsignedIntegerGeneratorOptions">
-            <RowsCountToGenerate>5000</RowsCountToGenerate>
+            <RowsCountToGenerate>50</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>false</Unique>
@@ -537,7 +537,7 @@
           <Checked>true</Checked>
           <DataType>DECIMAL</DataType>
           <GeneratorOptions xsi:type="DecimalGeneratorOptions">
-            <RowsCountToGenerate>5000</RowsCountToGenerate>
+            <RowsCountToGenerate>50</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>false</Unique>
@@ -561,7 +561,7 @@
           <Checked>true</Checked>
           <DataType>DATETIME</DataType>
           <GeneratorOptions xsi:type="MySqlDateTimeGeneratorOptions">
-            <RowsCountToGenerate>5000</RowsCountToGenerate>
+            <RowsCountToGenerate>50</RowsCountToGenerate>
             <AllowNulls>false</AllowNulls>
             <NullProportion>0</NullProportion>
             <Unique>false</Unique>
