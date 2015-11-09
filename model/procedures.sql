@@ -17,5 +17,9 @@ WHILE (i<total) DO
 	DEALLOCATE PREPARE Query;
 END WHILE;
 END ;;
-
+DELIMITER ;
 call sevryukov_task.test_views();
+
+
+
+
